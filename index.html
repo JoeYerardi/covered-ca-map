@@ -7,6 +7,18 @@
 	<link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
 	<style>
 		#map{ height: 100% }
+		.info {
+		    padding: 6px 8px;
+		    font: 14px/16px Arial, Helvetica, sans-serif;
+		    background: white;
+		    background: rgba(255,255,255,0.8);
+		    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+		    border-radius: 5px;
+		}
+		.info h4 {
+		    margin: 0 0 5px;
+		    color: #777;
+		}
 	</style>
 </head>
 <body>
@@ -31,6 +43,24 @@
 		id: 'mapbox.light'
 	}).addTo(map);
 
+	// control that shows county info on hover
+	var info = L.control();
+
+	info.onAdd = function (map) {
+		this._div = L.DomUtil.create('div', 'info');
+		this.update();
+		return this._div;
+	};
+
+	// method to update control based on feature properties passed
+	info.update = function (props) {
+		this._div.innerHTML = '<h4>Covered California Coverage</h4>' +  (props ?
+			'<b>' + props.covered_ca_county + '</b><br />' + props.covered_ca_total_enrollees_percent + ' people / mi<sup>2</sup>'
+			: 'Hover over a county');
+	};
+
+	info.addTo(map);
+
 	// get color depending on population density value
 	function getColor(pct) {
 		return pct > .05 ? '#e31a1c' :
@@ -52,6 +82,7 @@
 		};
 	}
 
+	// highlight county individually on mouseover
 	function highlightFeature(e) {
 		var layer = e.target;
 
@@ -62,24 +93,30 @@
 			fillOpacity: 0.7
 		});
 
+		// bring county to the front on mousever unless browser is ie, opera or edge
 		if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
 			layer.bringToFront();
 		}
 
+		// update info box on hover
 		info.update(layer.feature.properties);
 	}
 
+	// define geojson variable for use later in the code
 	var geojson;
 
+	// reset county style and info box on mouseout
 	function resetHighlight(e) {
 		geojson.resetStyle(e.target);
 		info.update();
 	}
 
+	// zoom to county on click
 	function zoomToFeature(e) {
 		map.fitBounds(e.target.getBounds());
 	}
 
+	// add mouse and click listeners to the layer
 	function onEachFeature(feature, layer) {
 		layer.on({
 			mouseover: highlightFeature,
@@ -88,6 +125,9 @@
 		});
 	}
 
+	// add covered california layer to the map
+	// style the layer
+	// add mouse and click listeners to the layer
 	geojson = L.geoJson(countyData, {
 		style: style,
 		onEachFeature: onEachFeature
