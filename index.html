@@ -31,8 +31,32 @@
 		id: 'mapbox.light'
 	}).addTo(map);
 
+	// get color depending on population density value
+	function getColor(pct) {
+		return pct > 5 ? '#e31a1c' :
+				pct > 4  ? '#fd8d3c' :
+				pct > 3  ? '#fecc5c' :
+				pct > 1  ? '#ffffb2' :
+							'#00FFFFFF';
+	}
+
+	// create a function that returns a color based on percent of population enrolled in covered california
+	function style(feature) {
+	return {
+		weight: 2,
+		opacity: 1,
+		color: 'white',
+		dashArray: '3',
+		fillOpacity: 0.7,
+		fillColor: getColor(feature.properties.covered_ca_total_enrollees_percent)
+	};
+}
+
 	// add the covered california layer to the map
-	var geojson = L.geoJson(countyData).addTo(map);
+	// style the layer
+	var geojson = L.geoJson(countyData, {
+		style: style,
+	}).addTo(map);
 </script>
 	</script>
 </body>
