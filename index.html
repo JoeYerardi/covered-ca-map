@@ -12,6 +12,8 @@
 <body>
 	<div id="map"></div>
 
+	<script type="text/javascript" src="data/covered_ca.geojson"></script>
+
 	<script>
 		// initialize the map
 		// set map centerpoint, initial zoom and other options
@@ -26,6 +28,8 @@
 		'Imagery © <a href="http://mapbox.com">Mapbox</a>',
 		id: 'mapbox.streets'
 	}).addTo(map);
+
+	var geojson = L.geoJson(countyData).addTo(map);
 </script>
 	</script>
 </body>
