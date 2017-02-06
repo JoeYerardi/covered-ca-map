@@ -55,7 +55,7 @@
 	// method to update control based on feature properties passed
 	info.update = function (props) {
 		this._div.innerHTML = '<h4>Covered California Coverage</h4>' +  (props ?
-			'<b>' + props.covered_ca_county + '</b><br />' + props.covered_ca_total_enrollees_percent * 100 + '% of the population is covered'
+			'<b>' + props.covered_ca_county + '</b><br />' + (props.covered_ca_total_enrollees_percent * 100).toFixed(1) + '% of the population is covered'
 			: 'Hover over a county');
 	};
 
