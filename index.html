@@ -4,10 +4,15 @@
 	<link rel="stylesheet" href="leaflet.css" />
 	<script src="leaflet.js"></script>
 	<style>
-		#map {height: 100%}
+		#map{ height: 100% }
 	</style>
 </head>
 <body>
 	<div id="map"></div>
+
+	<script>
+		// initialize the map
+		var map = L.map('map').setView([37.17, -119.45], 7);
+	</script>
 </body>
 </html>
