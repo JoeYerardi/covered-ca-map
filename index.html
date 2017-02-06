@@ -49,13 +49,53 @@
 		dashArray: '3',
 		fillOpacity: 0.7,
 		fillColor: getColor(feature.properties.covered_ca_total_enrollees_percent)
-	};
-}
+		};
+	}
 
-	// add the covered california layer to the map
+	// highlight county individually on mouseover
+	function highlightFeature(e) {
+	var layer = e.target;
+
+	layer.setStyle({
+		weight: 5,
+		color: '#666',
+		dashArray: '',
+		fillOpacity: 0.7
+	});
+
+	// bring county to the front on mousever unless browser is ie, opera or edge
+	if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+		layer.bringToFront();
+	}
+
+	// define geojson variable for use later in the code
+	var geojson;
+
+	// reset county style on mouseout
+	function resetHighlight(e) {
+    geojson.resetStyle(e.target);
+	}
+
+	// zoom to county on click
+	function zoomToFeature(e) {
+		map.fitBounds(e.target.getBounds());
+	}
+
+	// add mouse and click listeners to the layer
+	function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: resetHighlight,
+			click: zoomToFeature
+		});
+	}
+
+	// add covered california layer to the map
 	// style the layer
-	var geojson = L.geoJson(countyData, {
+	// add mouse and click listeners to the layer
+	geojson = L.geoJson(countyData, {
 		style: style,
+		onEachFeature: onEachFeature
 	}).addTo(map);
 </script>
 	</script>
