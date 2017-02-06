@@ -33,10 +33,10 @@
 
 	// get color depending on population density value
 	function getColor(pct) {
-		return pct > 5 ? '#e31a1c' :
-				pct > 4  ? '#fd8d3c' :
-				pct > 3  ? '#fecc5c' :
-				pct > 1  ? '#ffffb2' :
+		return pct > .05 ? '#e31a1c' :
+				pct > .04  ? '#fd8d3c' :
+				pct > .03  ? '#fecc5c' :
+				pct > .01  ? '#ffffb2' :
 							'#00FFFFFF';
 	}
 
