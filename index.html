@@ -93,7 +93,7 @@
 	// add covered california layer to the map
 	// style the layer
 	// add mouse and click listeners to the layer
-	var geojson = L.geoJson(countyData, {
+	geojson = L.geoJson(countyData, {
 		style: style,
 		onEachFeature: onEachFeature
 	}).addTo(map);
