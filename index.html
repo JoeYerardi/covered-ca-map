@@ -123,16 +123,16 @@
 	}
 
 	// zoom to county on click
-	// function zoomToFeature(e) {
-	// 	map.fitBounds(e.target.getBounds());
-	// }
+	function zoomToFeature(e) {
+		map.fitBounds(e.target.getBounds());
+	}
 
 	// add mouse and click listeners to the layer
 	function onEachFeature(feature, layer) {
 		layer.on({
 			mouseover: highlightFeature,
 			mouseout: resetHighlight,
-			//click: zoomToFeature
+			click: zoomToFeature
 		});
 	}
 
