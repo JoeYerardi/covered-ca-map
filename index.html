@@ -74,10 +74,10 @@
 
 	// get color depending on percent of population enrolled in covered california
 	function getColor(pct) {
-		return pct > .05 ? '#e31a1c' :
-				pct > .04  ? '#fd8d3c' :
-				pct > .03  ? '#fecc5c' :
-				pct > .01  ? '#ffffb2' :
+		return pct >= .05 ? '#e31a1c' :
+				pct >= .04  ? '#fd8d3c' :
+				pct >= .03  ? '#fecc5c' :
+				pct >= .01  ? '#ffffb2' :
 							'#00FFFFFF';
 	}
 
