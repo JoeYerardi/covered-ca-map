@@ -127,23 +127,17 @@
 		info.update();
 	}
 
-	// zoom to county on click
-	function zoomToFeature(e) {
-		map.fitBounds(e.target.getBounds());
-	}
-
-	// add mouse and click listeners to the layer
+	// add mouse listeners to the layer
 	function onEachFeature(feature, layer) {
 		layer.on({
 			mouseover: highlightFeature,
 			mouseout: resetHighlight,
-			click: zoomToFeature
 		});
 	}
 
 	// add covered california layer to the map
 	// style the layer
-	// add mouse and click listeners to the layer
+	// add mouse listeners to the layer
 	geojson = L.geoJson(countyData, {
 		style: style,
 		onEachFeature: onEachFeature
