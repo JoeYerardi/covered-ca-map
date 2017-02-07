@@ -72,7 +72,7 @@
 
 	info.addTo(map);
 
-	// get color depending on population density value
+	// get color depending on percent of population enrolled in covered california
 	function getColor(pct) {
 		return pct > .05 ? '#e31a1c' :
 				pct > .04  ? '#fd8d3c' :
@@ -152,7 +152,7 @@
 	legend.onAdd = function (map) {
 
 		var div = L.DomUtil.create('div', 'info legend'),
-			grades = [.01, .03, .04, .05],
+			grades = [.05, .04, .03, .01],
 			labels = [],
 			from, to;
 
