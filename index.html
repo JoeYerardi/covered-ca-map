@@ -63,10 +63,15 @@
 		return this._div;
 	};
 
+	// function to add thousands separator to info box data
+	function numberWithCommas(x) {
+	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+
 	// method to update control based on feature properties passed
 	info.update = function (props) {
 		this._div.innerHTML = '<h4>Covered California Coverage</h4>' +  (props ?
-			'<b>' + props.covered_ca_county + '</b><br />' + '% of population covered: '+ (props.covered_ca_total_enrollees_percent * 100).toFixed(1) + '% (' + props.covered_ca_total_enrollees + ')'
+			'<b>' + props.covered_ca_county + '</b><br />' + '% of population covered: '+ (props.covered_ca_total_enrollees_percent * 100).toFixed(1) + '% (' + numberWithCommas(props.covered_ca_total_enrollees) + ')'
 			: 'Hover over a county');
 	};
 
