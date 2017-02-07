@@ -154,16 +154,12 @@
 		var div = L.DomUtil.create('div', 'info legend'),
 			grades = [0.001, .01, .03, .04, .05],
 			labels = [],
-			from, to;
+			descriptions = [">=0%", ">=1%", ">=3%", ">=4%", ">=5%"];
 
 		// loop through pct intervals and generate a label with a colored square for each interval
 		for (var i = 0; i < grades.length; i++) {
-			from = grades[i];
-			to = grades[i + 1];
-
 			labels.push(
-				'<i style="background:' + getColor(from + 1) + '"></i> ' +
-				from + (to ? '&ndash;' + to : '+'));
+					'<i style="background:' + getColor(grades[i]) + '"></i>' + descriptions[i]);
 		}
 
 		div.innerHTML = labels.join('<br>');
