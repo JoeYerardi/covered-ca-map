@@ -71,13 +71,13 @@
 	// method to update control based on feature properties passed
 	info.update = function (props) {
 		this._div.innerHTML = '<h4>Covered California Coverage</h4>' +  (props ?
-			'<b>' + props.covered_ca_county + '</b><br />' + '% of population covered: '+ (props.covered_ca_total_enrollees_percent * 100).toFixed(1) + '% (' + numberWithCommas(props.covered_ca_total_enrollees) + ')'
+			'<b>' + props.covered_ca_county + '</b><br />' + '% of population covered: '+ (props.covered_ca_18_64_enrollees_percent * 100).toFixed(1) + '% (' + numberWithCommas(props.covered_ca_18_64_enrollees) + ')'
 			: 'Hover over a county');
 	};
 
 	info.addTo(map);
 
-	// get color depending on percent of population enrolled in covered california
+	// get color depending on percent of 18-64 population enrolled in covered california
 	function getColor(pct) {
 		return pct >= .05 ? '#e31a1c' :
 				pct >= .04  ? '#fd8d3c' :
@@ -86,7 +86,7 @@
 							'#00FFFFFF';
 	}
 
-	// create a function that returns a color based on percent of population enrolled in covered california
+	// create a function that returns a color based on percent of 18-64 population enrolled in covered california
 	function style(feature) {
 	return {
 		weight: 2,
@@ -94,7 +94,7 @@
 		color: 'white',
 		dashArray: '3',
 		fillOpacity: 0.7,
-		fillColor: getColor(feature.properties.covered_ca_total_enrollees_percent)
+		fillColor: getColor(feature.properties.covered_ca_18_64_enrollees_percent)
 		};
 	}
 
@@ -161,7 +161,7 @@
 				'<i style="background:' + getColor(grades[i]) + '"></i>' + descriptions[i]);
 		}
 
-		div.innerHTML = "<h4>Percent of Population Covered</h4>" + labels.join('<br>');
+		div.innerHTML = "<h4>Percent of 18-64 Population Covered</h4>" + labels.join('<br>');
 		return div;
 	};
 
