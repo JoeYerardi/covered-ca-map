@@ -153,11 +153,11 @@
 	geojson = L.geoJson(countyData, {
       style: style,
       onEachFeature: function( feature, layer ){
-        layer.bindPopup( '<b>' + feature.properties.combined_county + '</b><br/>' + 'Percent Covered: ' + (feature.properties.combined_combined_enrollees_percent * 100).toFixed(1) + '%')
+        layer.bindPopup( '<b>' + feature.properties.covered_ca_county + '</b><br/>' + 'Percent Covered: ' + (feature.properties.covered_ca_18_64_enrollees_percent * 100).toFixed(1) + '%')
       }
     }).addTo(map);
 	}
-	
+
 	// add legend to map unless browser is mobile
 	if (!L.Browser.mobile) {
 	var legend = L.control({position: 'bottomleft'});
